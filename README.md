@@ -15,5 +15,7 @@ First, `cd ./SGAI_MK3`. Then, `python main.py`
 
 ## Game Options
 Train Mode: Runs for around 1000 times before learning to win
+
 Test Mode: Uses Preloaded Q-Table, runs with pre-trained AI, wins often
+
 Hospital Mode: Zombies heal in hospital zone with only one attempt, two attempts are needed in no hospital zones.

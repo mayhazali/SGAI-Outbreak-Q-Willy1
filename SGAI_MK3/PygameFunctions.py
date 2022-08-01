@@ -49,7 +49,7 @@ def run(GameBoard, hasHospital, heal_button, kill_button):
     """
     screen.fill(BACKGROUND)
     build_grid(GameBoard, hasHospital) # Draw the grid
-    display_buttons(heal_button, kill_button)
+    #display_buttons(heal_button, kill_button)
     display_people(GameBoard)
     return pygame.event.get()
 

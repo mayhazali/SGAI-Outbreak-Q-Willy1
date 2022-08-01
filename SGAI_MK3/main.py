@@ -86,10 +86,10 @@ action_type = ""
 
 # Buttons
 kill_img = pygame.image.load("Assets/kill_button.png").convert_alpha()
-KillButton = kill_img.get_rect(topleft=(800, 50))
+#KillButton = kill_img.get_rect(topleft=(800, 50))
 
 heal_img = pygame.image.load("Assets/heal_button.png").convert_alpha()
-HealButton = heal_img.get_rect(topleft=(800, 200))
+#HealButton = heal_img.get_rect(topleft=(800, 200))
 
 kill_button = "button"
 heal_button = "button"
@@ -99,7 +99,7 @@ while running:
 
     if qStats.totalGames % 10 == 0:
         qStats.visualize()
-    if epochs_ran % 500 == 0:
+    if epochs_ran % 1000 == 0:
         print("Game Draw - Epochs ran out!")     
         GameBoard.gameFinished()
         qStats.addDraw()

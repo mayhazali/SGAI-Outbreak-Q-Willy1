@@ -27,33 +27,42 @@ class QStats:
 
     def visualize(self):
         # creating the dataset
-
-        labels = ["wins", "losses", "draws", "errors"]
-        values = [self.wins, self.lose, self.draw, self.error]
-        
-        fig = plt.figure(figsize = (10, 5))
-        
-        # creating the bar plot
-        plt.bar(labels, values, color ='maroon',
-                width = 0.4)
-        #label = str(self.wins) + " " + str(self.lose) + " " + str(self.draw) + " " + str(self.error)
-        plt.xlabel("Games ")
-        plt.ylabel("Number")
-        plt.title("Number of Games Won or Lost")
-        #plt.show()
-        filename = "Stats-Current-Run/" + str(self.totalGames) + "QPlot.png"
-        plt.savefig(filename)
-        plt.clf()
-        plt.close('all')
+        try:
+            labels = ["wins", "losses", "draws", "errors"]
+            values = [self.wins, self.lose, self.draw, self.error]
+            
+            fig = plt.figure(figsize = (10, 5))
+            
+            # creating the bar plot
+            barlist = plt.bar(labels, values, width = 0.4)
+            barlist[0].set_color('g')
+            barlist[1].set_color('r')
+            barlist[2].set_color('y')
+            barlist[3].set_color('k')
+            #label = str(self.wins) + " " + str(self.lose) + " " + str(self.draw) + " " + str(self.error)
+            plt.xlabel("Result")
+            plt.ylabel("Number of Games")
+            title = "Total Games: " + str(self.totalGames)
+            plt.title(title)
+            #plt.show()
+            filename = "Stats-Current-Run/" + str(self.totalGames) + "QPlot.png"
+            plt.savefig(filename)
+            plt.clf()
+            plt.close('all')
+        except:
+            print("Couldn't generate results chart.")
 
     def saveQTable(self, qTable, filename = "QTable.txt"):
-        f = open(filename,"a")
-        for row in qTable:
-            for value in row:
-                f.write(str(value) + ',')
-            f.write('\n')
-        f.write('\n\n')
-        f.close()
+        try:
+            f = open(filename,"a")
+            for row in qTable:
+                for value in row:
+                    f.write(str(value) + ',')
+                f.write('\n')
+            f.write('\n\n')
+            f.close()
+        except:
+            print("Couldn't write Q-Table to file.")
 
     def loadData(self, filename):
         try:
@@ -111,43 +120,50 @@ class QStats:
             print("Data File Issue: File not found or file format invalid")
 
     def calculatePercents(self):
-        total_zombie_interaction = DataCollector.zombies_killed + DataCollector.zombies_cured
         timesZombiesCured = 0
         timesZombiesKilled = 0
-        if total_zombie_interaction != 0:
-            timesZombiesCured = (DataCollector.zombies_cured / total_zombie_interaction) * 100
-            timesZombiesKilled = (DataCollector.zombies_killed / total_zombie_interaction) * 100
+
+        try:
+            total_zombie_interaction = DataCollector.zombies_killed + DataCollector.zombies_cured
+            if total_zombie_interaction != 0:
+                timesZombiesCured = (DataCollector.zombies_cured / total_zombie_interaction) * 100
+                timesZombiesKilled = (DataCollector.zombies_killed / total_zombie_interaction) * 100
+        except:
+            print("Stat Chart: calculation error")
         return timesZombiesCured, timesZombiesKilled
 
 
     def ethicsChart(self):
-        plt.clf()
+        try:
+            plt.clf()
 
-        x = ["Yes Hospital", "No Hospital"]
-        y_cured = [0,0]
-        y_killed = [0,0]
+            x = ["Yes Hospital", "No Hospital"]
+            y_cured = [0,0]
+            y_killed = [0,0]
 
-        # load self play hospital data
-        self.loadData("AiData_Hospital.txt")
-        values = self.calculatePercents()
-        y_cured[0] = values[0]
-        y_killed[0] = values[1]
+            # load self play hospital data
+            self.loadData("AiData_Hospital.txt")
+            values = self.calculatePercents()
+            y_cured[0] = values[0]
+            y_killed[0] = values[1]
 
-        # load self play no hospital data
-        self.loadData("AiData_NoHospital.txt")
-        values = self.calculatePercents()
-        y_cured[1] = values[0]
-        y_killed[1] = values[1]
+            # load self play no hospital data
+            self.loadData("AiData_NoHospital.txt")
+            values = self.calculatePercents()
+            y_cured[1] = values[0]
+            y_killed[1] = values[1]
 
-        plt.bar(x, y_killed, 0.5, label='Percent of Turns Killing Zombies', color='r')
-        plt.bar(x, y_cured, 0.5, bottom=y_killed, label='Percent of Turns Curing Zombies', color='b')
+            plt.bar(x, y_killed, 0.5, label='Percent of Turns Killing Zombies', color='r')
+            plt.bar(x, y_cured, 0.5, bottom=y_killed, label='Percent of Turns Curing Zombies', color='b')
 
-        plt.title("Decisions made")
-        plt.xlabel("Whether there was a hospital on the board")
-        plt.ylabel("Percent of turns interacting with zombies")
-        plt.legend(["Killed", "Cured"])
-        #plt.show()
-        filename = "Stats-Current-Run/" + str(self.totalGames) + "EthicsPlot.png"
-        plt.savefig(filename)
-        plt.clf()
-        plt.close('all')
+            plt.title("Decisions made")
+            plt.xlabel("Whether there was a hospital on the board")
+            plt.ylabel("Percent of turns interacting with zombies")
+            plt.legend(["Killed", "Cured"])
+            #plt.show()
+            filename = "Stats-Current-Run/" + str(self.totalGames) + "EthicsPlot.png"
+            plt.savefig(filename)
+            plt.clf()
+            plt.close('all')
+        except:
+            print("Ethics chart error")

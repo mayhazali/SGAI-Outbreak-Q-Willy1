@@ -608,6 +608,7 @@ class Board:
         print("\n\n\n\n\n\n")  
         self.qStats.addTotalGames()
         self.qStats.saveQTable(self.QTable)
+        DataCollector.turns_taken = 0
 
     # games finished with no errors
     def gameFinished(self):

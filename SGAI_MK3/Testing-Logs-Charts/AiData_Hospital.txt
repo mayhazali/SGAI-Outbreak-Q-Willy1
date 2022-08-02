@@ -1,0 +1,10 @@
+Game Number: 1099
+Winner: Human
+Has hospital: True
+Zombies killed: 15
+Zombies cured: 17518
+Zombies cured in hospital: 3115
+Humans vaccinated: 28036
+Humans remaining: 6
+Humans infected: 18051
+Number of turns taken: 91839

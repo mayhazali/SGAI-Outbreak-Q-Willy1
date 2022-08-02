@@ -1,0 +1,10 @@
+Game Number: 2508
+Winner: Human
+Has hospital: True
+Zombies killed: 486
+Zombies cured: 42082
+Zombies cured in hospital: 7433
+Humans vaccinated: 69992
+Humans remaining: 8
+Humans infected: 43870
+Number of turns taken: 84
